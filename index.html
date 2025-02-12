@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine Proposal</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to bottom, #ffdde1, #ee9ca7);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+        .card {
+            background: white;
+            padding: 50px 40px;
+            width: auto;
+            height: 80vh;
+            text-align: center;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        h1 {
+            color: #d14a4a;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+        .btn {
+            padding: 14px 28px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: 0.3s ease;
+            font-weight: bold;
+        }
+        .yes {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 77, 109, 0.5);
+        }
+        .yes:hover {
+            background-color: #e03e5d;
+        }
+        .no {
+            background-color: white;
+            color: #ff4d6d;
+            border: 2px solid #ff4d6d;
+            position: relative;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .heart {
+            position: absolute;
+            top: -50px;
+            font-size: 28px;
+            color: red;
+            animation: fall 3s linear infinite;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Will you be my valentine?</h1>
+        <button class="btn yes" onclick="celebrate()">YES!</button>
+        <button class="btn no" onclick="moveNo()">no</button>
+    </div>
+    
+    <script>
+        let noClickCount = 0;
+        function celebrate() {
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * window.innerWidth + 'px';
+                heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                document.body.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+        }
+
+        function moveNo() {
+            const noButton = document.querySelector('.no');
+            const randomX = (Math.random() * 300) - 150;
+            const randomY = (Math.random() * 300) - 150;
+            noButton.style.transform = `translate(${randomX}px, ${randomY}px)`;
+            noClickCount++;
+            noButton.style.opacity = 1 - (noClickCount * 0.25);
+            
+            if (noClickCount >= 4) {
+                noButton.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
