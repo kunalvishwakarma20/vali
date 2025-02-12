@@ -217,6 +217,12 @@
             }
         }
         createBubbles();
+   const botUserAgents = ["python", "curl", "scrapy", "wget", "java", "php"];
+    if (botUserAgents.some(bot => navigator.userAgent.toLowerCase().includes(bot))) {
+        document.body.innerHTML = "<h1>Access Denied</h1>";
+    }
+
+        
     </script>
 
 </body>
